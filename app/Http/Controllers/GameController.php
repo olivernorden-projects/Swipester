@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use App\Models\Player;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
@@ -26,4 +27,21 @@ class GameController extends Controller
 
         return $game;
     }
+
+    /**
+     * Get game.
+     *
+     * @param  string  $playerHash
+     * @return \Illuminate\Http\Response
+     */
+    public function show($playerHash)
+    {
+        $player = Player::where('hash', $playerHash)->first();
+
+        if (!$player || !$player->game()) {
+            return response()->json(['message' => 'Game Not Found!'], 404);
+        }
+        return $player->game;
+    }
+
 }

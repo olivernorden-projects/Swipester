@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/game/{subject}', [GameController::class, 'store']);
+Route::get('/game/{playerHash}', [GameController::class, 'show']);
