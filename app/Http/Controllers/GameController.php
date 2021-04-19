@@ -25,7 +25,7 @@ class GameController extends Controller
         $game->addPlayer();
         $game->addPlayer();
 
-        return $game;
+        return $game->formatted();
     }
 
     /**
@@ -41,7 +41,7 @@ class GameController extends Controller
         if (!$player || !$player->game()) {
             return response()->json(['message' => 'Game Not Found!'], 404);
         }
-        return $player->game;
+        return $player->game->formatted();
     }
 
 }

@@ -26,4 +26,11 @@ class Game extends Model
             'hash' => Str::random(20),
         ]);
     }
+
+    // Return game formatted for api
+    public function formatted() {
+        return $this->load(['subject' => function ($query) {
+            $query->with('items');
+        }])->load('players');
+    }
 }
