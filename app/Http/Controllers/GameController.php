@@ -38,7 +38,7 @@ class GameController extends Controller
     {
         $player = Player::where('hash', $playerHash)->first();
 
-        if (!$player || !$player->game()) {
+        if (!$player || !$player->game) {
             return response()->json(['message' => 'Game Not Found!'], 404);
         }
         return $player->game->formatted();
