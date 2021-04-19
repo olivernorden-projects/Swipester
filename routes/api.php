@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\SwipeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/game/{subject}', [GameController::class, 'store']);
 Route::get('/game/{playerHash}', [GameController::class, 'show']);
+
+Route::get('/game/{playerHash}/swipe/{subjectItem}/{approved?}', [SwipeController::class, 'store']);
