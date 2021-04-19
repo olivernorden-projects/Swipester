@@ -24,3 +24,4 @@ Route::post('/game/{subject}', [GameController::class, 'store']);
 Route::get('/game/{playerHash}', [GameController::class, 'show']);
 
 Route::post('/game/{playerHash}/swipe/{subjectItem}/{approved?}', [SwipeController::class, 'store']);
+Route::get('/game/{playerHash}/swipe', [SwipeController::class, 'index']);

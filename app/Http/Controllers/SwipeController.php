@@ -9,6 +9,22 @@ class SwipeController extends Controller
 {
 
     /**
+     * List swipes for game
+     *
+     * @param  String  $playerHash
+     * @return \Illuminate\Http\Response
+     */
+    public function index($playerHash)
+    {
+        $player = Player::where('hash', $playerHash)->first();
+
+        if (!$player || !$player->game) {
+            return response()->json(['message' => 'Game Not Found!'], 404);
+        }
+
+        return $player->game->swipes;
+    }
+    /**
      * Store a newly created resource in storage.
      *
      * @param  String  $playerHash
