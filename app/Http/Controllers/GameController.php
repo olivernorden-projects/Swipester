@@ -20,6 +20,10 @@ class GameController extends Controller
         if (!$subject) {
             return response()->json(['message' => 'Subject Not Found!'], 404);
         }
-        return $subject->games()->create();
+        $game = $subject->games()->create();
+        $game->addPlayer();
+        $game->addPlayer();
+
+        return $game;
     }
 }
