@@ -1,6 +1,9 @@
 <template>
   <b-container>
     <h1>{{ game.subject.title }}</h1>
+    <div v-if="opponents.length">
+      <Opponent v-for="opponent in opponents" :key="opponent.id" :opponent="opponent" />
+    </div>
     <ItemCard v-if="nextItem" :item="nextItem" @Like="Like" @Dislike="Dislike" />
     <p v-else>
       No more items available
@@ -11,10 +14,12 @@
 <script>
 import axios from 'axios'
 import ItemCard from '../../components/ItemCard'
+import Opponent from '../../components/Opponent'
 
 export default {
   components: {
-    ItemCard
+    ItemCard,
+    Opponent
   },
   async asyncData ({ error, params, $axios }) {
     const { hash } = params
@@ -31,6 +36,9 @@ export default {
     },
     currentPlayer () {
       return this.game.players.find(player => player.hash === this.$route.params.hash)
+    },
+    opponents () {
+      return this.game.players.filter(player => player.id !== this.currentPlayer.id)
     }
   },
   methods: {
