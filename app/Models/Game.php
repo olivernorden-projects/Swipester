@@ -7,12 +7,17 @@ use App\Models\Player;
 use App\Models\Subject;
 use App\Models\SubjectItem;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Game extends Model
 {
     use HasFactory;
+
+    protected $appends = [
+        'matches'
+    ];
 
     public function subject() {
         return $this->belongsTo(Subject::class);
@@ -32,6 +37,22 @@ class Game extends Model
             'game_id' => $this->id,
             'subject_item_id' => $subjectItem->id,
         ])->first();
+    }
+
+    public function getMatchesAttribute() {
+        return $this->subject->items->whereIn('id', $this->subjectItemMatchesIds());
+    }
+
+    // Get subject item ids of game matches
+    public function subjectItemMatchesIds() {
+        return DB::table('swipes')
+            ->select(DB::raw('COUNT(id) as count'), 'subject_item_id')
+            ->groupBy('subject_item_id')
+            ->where('game_id', $this->id)
+            ->where('approved', true)
+            ->havingRaw('count = 2')
+            ->get()
+            ->pluck('subject_item_id');
     }
 
     public function addPlayer() {
