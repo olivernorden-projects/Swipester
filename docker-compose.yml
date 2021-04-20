@@ -1,6 +1,29 @@
 # For more information: https://laravel.com/docs/sail
 version: '3'
 services:
+    nginx: 
+        build:
+            context: ./proxy
+            dockerfile: Dockerfile
+        ports: 
+            - '${APP_PORT:-80}:80'
+        networks:
+            - sail
+        depends_on:
+            - laravel.test
+            - nuxt
+    nuxt:
+        image: node:12
+        restart: always
+        command: npm run dev
+        working_dir: /usr/src/app
+        volumes: 
+            - ./client:/usr/src/app
+        environment:
+            HOST: nuxt
+            BASE_URL: http://laravel.test:80/
+        networks:
+            - sail
     laravel.test:
         build:
             context: ./vendor/laravel/sail/runtimes/8.0
@@ -8,8 +31,6 @@ services:
             args:
                 WWWGROUP: '${WWWGROUP}'
         image: sail-8.0/app
-        ports:
-            - '${APP_PORT:-80}:80'
         environment:
             WWWUSER: '${WWWUSER}'
             LARAVEL_SAIL: 1
