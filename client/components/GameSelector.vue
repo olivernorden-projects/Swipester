@@ -20,7 +20,7 @@ export default {
     async createGame (subjectId) {
       const { data: game } = await axios.post(`/api/game/${subjectId}`)
       const playerHash = game.players[0].hash
-      this.$router.push(`/game/${playerHash}`)
+      this.$router.push(`/${playerHash}`)
     }
   }
 }
