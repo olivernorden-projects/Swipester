@@ -4,6 +4,11 @@
     <div v-if="opponents.length">
       <Opponent v-for="opponent in opponents" :key="opponent.id" :opponent="opponent" />
     </div>
+    <p>
+      <nuxt-link :to="matchesLink">
+        View matches
+      </nuxt-link>
+    </p>
     <ItemCard v-if="nextItem" :item="nextItem" @Like="Like" @Dislike="Dislike" />
     <p v-else>
       No more items available
@@ -39,6 +44,9 @@ export default {
     },
     opponents () {
       return this.game.players.filter(player => player.id !== this.currentPlayer.id)
+    },
+    matchesLink () {
+      return `/${this.currentPlayer.hash}/matches`
     }
   },
   methods: {
