@@ -15,7 +15,7 @@ class Player extends Model
         'hash',
     ];
 
-    protected $appends = ['swipes_left'];
+    protected $appends = ['swipes_left', 'link'];
 
     public function game() {
         return $this->belongsTo(Game::class);
@@ -28,5 +28,9 @@ class Player extends Model
     public function getSwipesLeftAttribute() {
         $swipedSubjectItemIds = $this->swipes->pluck('subject_item_id');
         return $this->game->subject->items->whereNotIn('id', $swipedSubjectItemIds)->values();
+    }
+
+    public function getLinkAttribute() {
+        return url("/" . $this->hash);
     }
 }
