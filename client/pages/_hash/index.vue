@@ -5,14 +5,14 @@
       <Opponent v-for="opponent in opponents" :key="opponent.id" :opponent="opponent" />
     </div>
     <p>
-      <nuxt-link :to="matchesLink">
+      <b-button :to="matchesLink" variant="outline-success" class="mt-3">
         View matches
-      </nuxt-link>
+      </b-button>
     </p>
     <ItemCard v-if="nextItem" :item="nextItem" @Like="Like" @Dislike="Dislike" />
-    <p v-else>
+    <b-alert v-else show variant="secondary">
       No more items available
-    </p>
+    </b-alert>
   </b-container>
 </template>
 

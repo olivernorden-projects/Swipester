@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>
+    <p class="opponent-link">
       Opponent link: <a :href="opponent.link">{{ opponent.link }}</a>
     </p>
   </div>
@@ -19,3 +19,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  .opponent-link {
+    max-width: unset;
+  }
+</style>

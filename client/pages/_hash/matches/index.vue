@@ -1,18 +1,18 @@
 <template>
-  <div>
+  <b-container>
     <h1>Matches</h1>
     <p>
       <nuxt-link :to="matchesLink">
         Continue swiping
       </nuxt-link>
     </p>
-    <div v-if="match.matches.length">
+    <div v-if="match.matches.length" class="matches__container">
       <ItemCard v-for="match in match.matches" :key="match.id" :item="match" :controlls="false" />
     </div>
     <p v-else>
       No matches yet, keep swiping or start a new game
     </p>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -35,5 +35,8 @@ export default {
 </script>
 
 <style>
-
+  .matches__container {
+    display: flex;
+    flex-wrap: wrap;
+  }
 </style>
