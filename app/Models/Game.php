@@ -40,7 +40,7 @@ class Game extends Model
     }
 
     public function getMatchesAttribute() {
-        return $this->subject->items->whereIn('id', $this->subjectItemMatchesIds());
+        return $this->subject->items->whereIn('id', $this->subjectItemMatchesIds())->values();
     }
 
     // Get subject item ids of game matches
