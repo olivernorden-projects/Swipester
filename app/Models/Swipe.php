@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Game;
+use App\Models\SubjectItem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -18,5 +19,9 @@ class Swipe extends Model
 
     public function game() {
         return $this->belongsTo(Game::class);
+    }
+
+    public function subjectItem() {
+        return $this->belongsTo(SubjectItem::class);
     }
 }

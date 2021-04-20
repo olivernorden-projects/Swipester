@@ -22,7 +22,7 @@ class SwipeController extends Controller
             return response()->json(['message' => 'Game Not Found!'], 404);
         }
 
-        return $player->game->swipes;
+        return $player->game->swipes->load('subjectItem');
     }
     /**
      * Store a newly created resource in storage.
