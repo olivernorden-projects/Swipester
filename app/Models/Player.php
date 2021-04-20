@@ -27,6 +27,6 @@ class Player extends Model
 
     public function getSwipesLeftAttribute() {
         $swipedSubjectItemIds = $this->swipes->pluck('subject_item_id');
-        return $this->game->subject->items->whereNotIn('id', $swipedSubjectItemIds);
+        return $this->game->subject->items->whereNotIn('id', $swipedSubjectItemIds)->values();
     }
 }
