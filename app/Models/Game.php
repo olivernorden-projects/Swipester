@@ -45,8 +45,6 @@ class Game extends Model
     public function formatted() {
         return $this->load(['subject' => function ($query) {
             $query->with('items');
-        }])->load(['players' => function ($query) {
-            $query->with('swipes');
-        }]);
+        }])->load('players');
     }
 }

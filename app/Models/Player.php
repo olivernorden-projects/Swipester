@@ -15,11 +15,18 @@ class Player extends Model
         'hash',
     ];
 
+    protected $appends = ['swipes_left'];
+
     public function game() {
         return $this->belongsTo(Game::class);
     }
 
     public function swipes() {
         return $this->hasMany(Swipe::class);
+    }
+
+    public function getSwipesLeftAttribute() {
+        $swipedSubjectItemIds = $this->swipes->pluck('subject_item_id');
+        return $this->game->subject->items->whereNotIn('id', $swipedSubjectItemIds);
     }
 }
