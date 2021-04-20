@@ -1,7 +1,10 @@
 <template>
   <b-container>
     <h1>{{ game.subject.title }}</h1>
-    <ItemCard :item="nextItem" @Like="Like" @Dislike="Dislike" />
+    <ItemCard v-if="nextItem" :item="nextItem" @Like="Like" @Dislike="Dislike" />
+    <p v-else>
+      No more items available
+    </p>
   </b-container>
 </template>
 
