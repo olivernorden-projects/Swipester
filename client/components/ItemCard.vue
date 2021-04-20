@@ -12,18 +12,24 @@
       {{ item.description }}
     </b-card-text>
 
-    <b-button variant="outline-danger" @click="$emit('Dislike', item.id)">
-      Dislike
-    </b-button>
-    <b-button variant="outline-success" @click="$emit('Like', item.id)">
-      Like
-    </b-button>
+    <div v-if="controlls">
+      <b-button variant="outline-danger" @click="$emit('Dislike', item.id)">
+        Dislike
+      </b-button>
+      <b-button variant="outline-success" @click="$emit('Like', item.id)">
+        Like
+      </b-button>
+    </div>
   </b-card>
 </template>
 
 <script>
 export default {
   props: {
+    controlls: {
+      type: Boolean,
+      default: true
+    },
     item: {
       type: Object,
       default: () => ({
