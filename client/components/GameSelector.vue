@@ -1,6 +1,6 @@
 <template>
   <div class="game-selector__container">
-    <b-button v-for="subject in availableGames" :key="subject.id" variant="outline-primary" class="game-selector__btn" @click="createGame(subject.id)">
+    <b-button v-for="subject in availableGames" :key="subject.id" variant="info" class="game-selector__btn" @click="createGame(subject.id)">
       {{ subject.title }}
     </b-button>
   </div>

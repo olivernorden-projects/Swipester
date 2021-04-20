@@ -18,5 +18,10 @@ export default {
 </script>
 
 <style>
-
+  .navbar-brand {
+    text-decoration: none;
+  }
+  .bg-dark {
+    background-color: rgba(0,0,0,0.25) !important;
+  }
 </style>
