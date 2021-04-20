@@ -30,7 +30,7 @@ class Game extends Model
         return Swipe::where([
             'player_id' => $player->id,
             'game_id' => $this->id,
-            'subjectItem_id' => $subjectItem->id,
+            'subject_item_id' => $subjectItem->id,
         ])->first();
     }
 

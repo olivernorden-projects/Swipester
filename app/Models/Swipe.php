@@ -13,7 +13,7 @@ class Swipe extends Model
     protected $fillable = [
         'player_id',
         'approved',
-        'subjectItem_id',
+        'subject_item_id',
     ];
 
     public function game() {

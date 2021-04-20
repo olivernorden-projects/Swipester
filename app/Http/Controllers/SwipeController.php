@@ -53,7 +53,7 @@ class SwipeController extends Controller
         return $player->game->swipes()->create([
             'player_id' => $player->id,
             'approved' => $approved,
-            'subjectItem_id' => $subjectItem->id,
+            'subject_item_id' => $subjectItem->id,
         ]);
     }
 }
