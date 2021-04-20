@@ -27,7 +27,10 @@ export default {
   },
   computed: {
     nextItem () {
-      return this.game.subject.items[0]
+      return this.currentPlayer.swipes_left[0]
+    },
+    currentPlayer () {
+      return this.game.players.find(player => player.hash === this.$route.params.hash)
     }
   },
   methods: {
@@ -45,7 +48,7 @@ export default {
       } catch (error) {}
 
       // Update subject items list
-      this.game.subject.items = this.game.subject.items.filter(item => item.id !== subjectItemId)
+      this.currentPlayer.swipes_left = this.currentPlayer.swipes_left.filter(item => item.id !== subjectItemId)
     }
   }
 }
