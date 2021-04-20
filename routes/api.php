@@ -22,6 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/game/{subject}', [GameController::class, 'store']);
 Route::get('/game/{playerHash}', [GameController::class, 'show']);
+Route::get('/game', [GameController::class, 'index']);
 
 Route::post('/game/{playerHash}/swipe/{subjectItem}/{approved?}', [SwipeController::class, 'store']);
 Route::get('/game/{playerHash}/swipe', [SwipeController::class, 'index']);

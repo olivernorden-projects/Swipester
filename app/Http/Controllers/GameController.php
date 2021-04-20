@@ -10,6 +10,16 @@ use Illuminate\Http\Request;
 class GameController extends Controller
 {
     /**
+     * Create list of available games
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Subject $subject, Request $request)
+    {
+        return Subject::get();
+    }
+
+    /**
      * Create new game
      *
      * @param  \App\Models\Subject  $subject
