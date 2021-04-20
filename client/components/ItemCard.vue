@@ -48,4 +48,10 @@ export default {
     margin: 2rem auto 0;
     text-align: center;
   }
+
+  .card-img-top {
+    width: 50%;
+    margin: 1rem auto 0;
+    display: block;
+  }
 </style>
