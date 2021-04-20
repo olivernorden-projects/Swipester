@@ -12,7 +12,7 @@
       {{ item.description }}
     </b-card-text>
 
-    <div v-if="controlls">
+    <div v-if="controlls" class="mt-4">
       <b-button variant="outline-danger" @click="$emit('Dislike', item.id)">
         Dislike
       </b-button>
