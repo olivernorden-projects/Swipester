@@ -9,8 +9,8 @@ export default {
     try {
       const { data: game } = await $axios.get(`/api/game/${hash}`)
       return { game }
-    } catch (e) {
-      error({ statusCode: 404, message: 'Game not found' })
+    } catch ({ response }) {
+      error({ statusCode: response.status, message: response.data.message })
     }
   }
 }
