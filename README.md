@@ -2,6 +2,7 @@
 Swipester is a game where two people are shown various items related to a given subject, such as movies or food, and asked to either like or dislike the item to find items with common approval. Swipester was written with Laravel and Nuxt (Vue ssr)
 
 [App demo](https://swipester.olivernorden.se)
+
 [App showcase](https://olivernorden.se/projects/swipester)
 
 ## Set up locally
