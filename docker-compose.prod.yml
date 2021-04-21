@@ -46,8 +46,6 @@ services:
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         volumes:
             - 'swipester-data:/var/lib/mysql'
-        ports: 
-            - '3306:3306'
         healthcheck:
             test: ["CMD", "mysqladmin", "ping"]
         networks:
