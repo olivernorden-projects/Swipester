@@ -9,15 +9,15 @@ services:
             - swipester
         depends_on:
             - laravel
-            - nuxt
-    nuxt:
+            - swipester-nuxt
+    swipester-nuxt:
         build:
             context: ./client
             dockerfile: Dockerfile
         restart: always
         working_dir: /usr/src/app
         environment:
-            HOST: nuxt
+            HOST: swipester-nuxt
             BASE_URL: http://laravel:80/
         networks:
             - swipester
