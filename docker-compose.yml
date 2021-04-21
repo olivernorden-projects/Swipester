@@ -10,7 +10,7 @@ services:
         networks:
             - sail
         depends_on:
-            - laravel.test
+            - laravel
             - nuxt
     nuxt:
         image: node:12
@@ -21,10 +21,11 @@ services:
             - ./client:/usr/src/app
         environment:
             HOST: nuxt
-            BASE_URL: http://laravel.test:80/
+            BASE_URL: http://laravel:80/
+            CHOKIDAR_USEPOLLING: 1
         networks:
             - sail
-    laravel.test:
+    laravel:
         build:
             context: ./vendor/laravel/sail/runtimes/8.0
             dockerfile: Dockerfile
@@ -44,7 +45,7 @@ services:
             - redis
             - selenium
     mysql:
-        image: 'mysql:8.0'
+        image: 'mysql:5.7'
         ports:
             - '${FORWARD_DB_PORT:-3306}:3306'
         environment:

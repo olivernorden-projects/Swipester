@@ -1,0 +1,63 @@
+version: '3'
+services:
+    swipester: 
+        build:
+            context: ./proxy
+            dockerfile: Dockerfile
+        ports: 
+            - '8080:80'
+        networks:
+            - droplet
+            - swipester
+        depends_on:
+            - laravel
+            - nuxt
+    nuxt:
+        build:
+            context: ./client
+            dockerfile: Dockerfile
+        restart: always
+        working_dir: /usr/src/app
+        environment:
+            HOST: nuxt
+            BASE_URL: http://laravel:80/
+        networks:
+            - swipester
+    laravel:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        environment:
+            WWWUSER: '${WWWUSER}'
+            APP_URL: ${APP_URL}
+        depends_on:
+            - mysql
+        networks:
+            - swipester
+    mysql:
+        image: 'mysql:5.7'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        volumes:
+            - 'swipester-data:/var/lib/mysql'
+        ports: 
+            - '3306:3306'
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping"]
+        networks:
+            - swipester
+networks: 
+    droplet:
+        external: 
+            name: digitalocean-proxy_droplet
+    swipester:
+        driver: bridge
+volumes:
+    swipester-data:
+        driver: local
